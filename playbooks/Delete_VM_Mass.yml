@@ -1,0 +1,17 @@
+---
+- name: Delete VMs
+  hosts: "{{XenMaster}}"
+  vars_files: vars/{{tag}}_VM.json
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Delete VM
+      community.general.xenserver_guest:
+        hostname: 
+        username: 
+        password: 
+        uuid: "{{item.vm_uuid}}"
+        state: absent
+        force: true
+      with_items: 
+          - "{{vm}}"
