@@ -1,0 +1,26 @@
+######################################
+# For use with the XOA Netbox Plugin #
+###########################################################################################
+# Below is an example inventory file in yml format with information exported from Netbox. #
+# The XOA Netbox plugin syncs IP addresses, VM names, owners, and other information such  #
+# as VM specs and uuids. It is structured as one dynamic inventory with groups based on   #
+# tags in XOA. They are named after the VM in XOA and have a host variable ansible_host   #
+# with their IP address. The groups have a preset ansible_become_password variable to     #
+# represent the sudo password used to escalate privileges for certain tasks.              #
+###########################################################################################
+tag:
+  hosts:
+    vm_in_tag:
+      ansible_host: 10.X.X.X
+    vm2_in_tag:
+      ansible_host: 10.X.X.Y
+  vars: 
+    ansible_become_password: VM Sudo Password for that tag (assuming passwords are the same across XOA tags due to using same template)
+tag2:
+  hosts:
+    vm_in_tag2:
+      ansible_host: 10.X.X.Z
+    vm2_in_tag2:
+      ansible_host: 10.X.Y.X
+  vars:
+    ansible_become_password: VM Sudo Password for that tag (assuming passwords are the same across XOA tags due to using same template)
