@@ -1,5 +1,5 @@
 ---
-- name: Delete VMs
+- name: Delete VM Mass
   hosts: "{{XenMaster}}"
   vars_files: vars/{{tag}}_VM.json
   gather_facts: false
