@@ -1,0 +1,18 @@
+---
+- name: Create VM Mass
+  hosts: "{{XenMaster}}"
+  vars_files: vars/{{vars}}.json
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Create VM
+      community.general.xenserver_guest:
+        hostname: 
+        username: 
+        password: 
+        name: "{{template}} - {{item.first_name}} {{item.last_name}}"
+        state: poweredon
+        linked_clone: true
+        template: "{{template}}"
+      with_items: 
+          - "{{users}}"    
