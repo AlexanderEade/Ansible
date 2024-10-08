@@ -1,0 +1,5 @@
+---
+collections:
+  - paloaltonetworks.panos
+  - community.general
+  - cisco.ios
