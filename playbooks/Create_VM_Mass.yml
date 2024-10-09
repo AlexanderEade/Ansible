@@ -7,9 +7,9 @@
   tasks:
     - name: Create VM
       community.general.xenserver_guest:
-        hostname: 
-        username: 
-        password: 
+        hostname: "{{ansible_host}}"
+        username: "{{xenserver_username}}"
+        password: "{{xenserver_password}}"
         name: "{{template}} - {{item.first_name}} {{item.last_name}}"
         state: poweredon
         linked_clone: true
