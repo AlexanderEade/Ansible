@@ -1,0 +1,36 @@
+---
+- name: Modify VM Hardware
+  hosts: "{{XenMaster}}"
+  vars_files: vars/{{tag}}_VM.json
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Turn VM Off
+      community.general.xenserver_guest_powerstate:
+        hostname: "{{ansible_host}}"
+        username: "{{xenserver_username}}"
+        password: "{{xenserver_password}}"
+        uuid: "{{item.vm_uuid}}"
+        state: shutdown-guest
+      with_items:
+        - "{{vm}}"
+    - name: Modify VM Hardware
+      community.general.xenserver_guest:
+        hostname: "{{ansible_host}}"
+        username: "{{xenserver_username}}"
+        password: "{{xenserver_password}}"
+        uuid: "{{item.vm_uuid}}"
+        hardware:
+          num_cpus: "{{core | default(omit) }}"
+          memory_mb: "{{ram | default(omit) }}"
+      with_items:
+        - "{{vm}}"
+    - name: Turn VM On
+      community.general.xenserver_guest_powerstate:
+        hostname: "{{ansible_host}}"
+        username: "{{xenserver_username}}"
+        password: "{{xenserver_password}}"
+        uuid: "{{item.vm_uuid}}"
+        state: powered-on
+      with_items:
+        - "{{vm}}"
