@@ -14,7 +14,7 @@
         hostname: "{{ansible_host}}"
         username: "{{xenserver_username}}"
         password: "{{xenserver_password}}"
-# This template variable is the template name copied exactly from XOA. The first_name and last_name variables are defined in the array called users in the vars/{{vars}}.json file #
+# This template variable is the template name copied exactly from XOA. The first_name and last_name variables are defined in objects from the array called users in the vars/{{classname}}.json file #
         name: "{{template}} - {{item.first_name}} {{item.last_name}}"
         state: poweredon
         linked_clone: true
