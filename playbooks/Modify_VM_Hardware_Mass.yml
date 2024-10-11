@@ -1,36 +1,49 @@
+# Vars needed at runtime include: "tag", "XenMaster", and optionally "core" and/or "ram" #
 ---
 - name: Modify VM Hardware
+# This XenMaster variable is the pool master in your XCP-ng pool. You should define it with the exact name of the host in the XCP-ng Inventory #
   hosts: "{{XenMaster}}"
+# This tag variable is the exact XOA tag of VMs you want to modify #  
   vars_files: vars/{{tag}}_VM.json
   gather_facts: false
   become: true
   tasks:
     - name: Turn VM Off
       community.general.xenserver_guest_powerstate:
+#This ansible_host variable is taken from the XenMaster host vars. The xenserver_username and xenserver_password variables are defined in the Ansible inventory for the XCP-ng devices #
         hostname: "{{ansible_host}}"
         username: "{{xenserver_username}}"
         password: "{{xenserver_password}}"
+#This vm_uuid variable is defined in objects from the array called vm in the vars/{{tag}}_VM.json file #
         uuid: "{{item.vm_uuid}}"
         state: shutdown-guest
+# This vm variable is the name of the array in the JSON file to loop against #
       with_items:
         - "{{vm}}"
     - name: Modify VM Hardware
       community.general.xenserver_guest:
+# This ansible_host variable is taken from the XenMaster host vars. The xenserver_username and xenserver_password variables are defined in the Ansible inventory for the XCP-ng devices #
         hostname: "{{ansible_host}}"
         username: "{{xenserver_username}}"
         password: "{{xenserver_password}}"
+# This vm_uuid variable is defined in objects from the array called vm in the vars/{{tag}}_VM.json file #
         uuid: "{{item.vm_uuid}}"
         hardware:
+# This core variable is the vCPU count you wish to change to on the VM. This ram variable is the RAM amount in MB. These variables will be left out by default in case you just want to change the vCPU count or RAM.
           num_cpus: "{{core | default(omit) }}"
           memory_mb: "{{ram | default(omit) }}"
+# This vm variable is the name of the array in the JSON file to loop against #
       with_items:
         - "{{vm}}"
     - name: Turn VM On
       community.general.xenserver_guest_powerstate:
+# This ansible_host variable is taken from the XenMaster host vars. The xenserver_username and xenserver_password variables are defined in the Ansible inventory for the XCP-ng devices #
         hostname: "{{ansible_host}}"
         username: "{{xenserver_username}}"
         password: "{{xenserver_password}}"
+# This vm_uuid variable is defined in objects from the array called vm in the vars/{{tag}}_VM.json file #
         uuid: "{{item.vm_uuid}}"
         state: powered-on
+# This vm variable is the name of the array in the JSON file to loop against #
       with_items:
         - "{{vm}}"
