@@ -1,3 +1,4 @@
+# Vars needed at runtime include: "tag" #
 ---
 - name: Add Package
 # The tag variable is the group of hosts (from the dynamic netbox inventory) that the package will be installed on. It is the exact XOA tag for the VMs #
