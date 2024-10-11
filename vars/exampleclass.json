@@ -1,0 +1,22 @@
+{
+    "users": [
+        {
+            "first_name": "Example",
+            "last_name": "Example",
+            "email": "example.email",
+            "password": "examplePassword"
+        },
+        {
+            "first_name": "Example",
+            "last_name": "Example",
+            "email": "example.email",
+            "password": "examplePassword"
+        },
+        {
+            "first_name": "Example",
+            "last_name": "Example",
+            "email": "example.email",
+            "password": "examplePassword"
+        }
+    ]
+}
