@@ -1,4 +1,3 @@
-# This JSON file is an export from Netbox. It contains all of the VM's in a tag with their name, uuid, and IP address. The file name is reflective of the exact XOA tag with _VM added to the end. #
 {
     "vm": [
         {
