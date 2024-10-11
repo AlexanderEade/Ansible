@@ -1,0 +1,19 @@
+{
+    "vm": [
+        {
+            "name": "Test Class_test - Jane Doe",
+            "vm_uuid": "3008baae-6bb0-282c-f47f-0b443e0781e3",
+            "vm_ip": "10.X.X.X/24"
+        },
+        {
+            "name": "Test Class_test - John Doe",
+            "vm_uuid": "711cfa34-6a75-efff-8792-d27fa025f5c6",
+            "vm_ip": "10.X.X.Y/24"
+        },
+        {
+            "name": "Test Class_test - John Fortnite",
+            "vm_uuid": "293e44d8-d68a-3af6-cb43-6b8fcc0cf38e",
+            "vm_ip": "10.X.X.Z/24"
+        }
+    ]
+}
