@@ -1,0 +1,9 @@
+---
+- name: Add Package
+# The tag variable is the group of hosts (from the dynamic netbox inventory) that the package will be installed on. It is the exact XOA tag for the VMs #
+  hosts: "{{tag}}"
+  become: true
+  tasks:
+    - name: Add Package
+      ansible.builtin.apt:
+        name: "{{package}}"
