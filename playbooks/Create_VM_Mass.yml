@@ -1,18 +1,24 @@
+# Vars needed at runtime include: "classname", "XenMaster", and "template" #
 ---
 - name: Create VM Mass
+# This XenMaster variable is the pool master in your XCP-ng pool #
   hosts: "{{XenMaster}}"
-  vars_files: vars/{{vars}}.json
+# This classname variable is the name of the class that you want to create VMs for #  
+  vars_files: vars/{{classname}}.json
   gather_facts: false
   become: true
   tasks:
     - name: Create VM
       community.general.xenserver_guest:
+# This ansible_host variable is taken from the XenMaster host vars. The xenserver_username and xenserver_password variables are defined in the Ansible inventory for the XCP-ng devices #
         hostname: "{{ansible_host}}"
         username: "{{xenserver_username}}"
         password: "{{xenserver_password}}"
+# This template variable is the template name copied exactly from XOA. The first_name and last_name variables are defined in the array called users in the vars/{{vars}}.json file #
         name: "{{template}} - {{item.first_name}} {{item.last_name}}"
         state: poweredon
         linked_clone: true
         template: "{{template}}"
+# This users variable is the name of the array in the JSON file to loop against #
       with_items: 
           - "{{users}}"    
